@@ -1,5 +1,14 @@
-import { useMemo, useReducer, useState, useCallback } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 import { createSelector } from 'reselect';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  loadStart,
+  loadSuccess,
+  loadFailure,
+  addDraft,
+  updateDraft,
+  deleteDraft as deleteDraftAction,
+} from './draftSlice';
 
 const initialState = {
   drafts: [],
@@ -63,7 +72,8 @@ const mockFetchDrafts = () =>
   });
 
 export default function App() {
-  const [state, dispatch] = useReducer(draftReducer, initialState);
+  const state = useSelector((s) => s.draft);
+  const dispatch = useDispatch();
   const [form, setForm] = useState({ id: '', title: '', content: '' });
   const [searchTerm, setSearchTerm] = useState('');
   const [showMockApi, setShowMockApi] = useState(true);
@@ -72,14 +82,14 @@ export default function App() {
   const draftCounts = useMemo(() => selectDraftCounts(state), [state]);
 
   const loadDrafts = useCallback(async () => {
-    dispatch({ type: 'LOAD_START' });
+    dispatch(loadStart());
     try {
       const drafts = showMockApi ? await mockFetchDrafts() : [];
-      dispatch({ type: 'LOAD_SUCCESS', payload: drafts });
+      dispatch(loadSuccess(drafts));
     } catch (error) {
-      dispatch({ type: 'LOAD_FAILURE', payload: error.message || 'Failed to load drafts' });
+      dispatch(loadFailure(error.message || 'Failed to load drafts'));
     }
-  }, [showMockApi]);
+  }, [showMockApi, dispatch]);
 
   const saveDraft = useCallback(async () => {
     const now = Date.now();
@@ -91,9 +101,9 @@ export default function App() {
     };
 
     if (form.id) {
-      dispatch({ type: 'UPDATE_DRAFT', payload: draft });
+      dispatch(updateDraft(draft));
     } else {
-      dispatch({ type: 'ADD_DRAFT', payload: draft });
+      dispatch(addDraft(draft));
     }
     setForm({ id: '', title: '', content: '' });
   }, [form]);
@@ -103,7 +113,7 @@ export default function App() {
   }, []);
 
   const deleteDraft = useCallback((draftId) => {
-    dispatch({ type: 'DELETE_DRAFT', payload: draftId });
+    dispatch(deleteDraftAction(draftId));
     if (form.id === draftId) {
       setForm({ id: '', title: '', content: '' });
     }

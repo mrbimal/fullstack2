@@ -1,0 +1,78 @@
+:root{
+	--bg:#0f1724;
+	--card:#0b1220;
+	--muted:#9aa4b2;
+	--accent:#3b82f6;
+	--accent-2:#06b6d4;
+	--glass: rgba(255,255,255,0.03);
+	--radius:12px;
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+	margin:0;
+	font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+	background:linear-gradient(180deg,#071022 0%, #041024 100%);
+	color: #e6eef6;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+	padding:24px;
+}
+.app-shell{
+	max-width:980px;
+	margin:0 auto;
+}
+header{
+	display:flex;
+	gap:16px;
+	align-items:center;
+	justify-content:space-between;
+	margin-bottom:20px;
+}
+header h1{margin:0;font-size:20px}
+.header-actions{display:flex;gap:12px;align-items:center}
+button{
+	background:var(--accent);
+	color:white;
+	border:0;padding:8px 12px;border-radius:8px;
+	cursor:pointer;font-weight:600;
+}
+button.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+button.danger{background:#ef4444}
+section.panel{
+	background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+	padding:16px;border-radius:var(--radius);margin-bottom:16px;box-shadow:0 6px 18px rgba(2,6,23,0.6);
+}
+.panel-grid{display:grid;grid-template-columns:1fr 320px;gap:16px}
+.stats-card, .search-card{background:var(--glass);padding:12px;border-radius:10px}
+.stats-card h2,.search-card label{margin:0 0 8px 0}
+label{display:block;color:var(--muted);font-size:13px}
+input,textarea,select{
+	width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;font-size:14px
+}
+textarea{min-height:96px}
+.form-panel .form-actions{display:flex;gap:8px;margin-top:12px}
+.draft-list, ul{list-style:none;padding:0;margin:0}
+.draft-item{display:flex;justify-content:space-between;gap:12px;padding:12px;border-radius:10px;margin-bottom:8px;background:rgba(255,255,255,0.02);align-items:flex-start}
+.draft-item h3{margin:0 0 6px 0}
+.draft-actions button{margin-left:6px}
+.empty-state{color:var(--muted)}
+.error{color:#ffb4b4}
+
+@media (max-width:760px){
+	.panel-grid{grid-template-columns:1fr}
+	.header-actions{flex-wrap:wrap}
+}
+
+.posts-list li{margin-bottom:12px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02)}
+.posts-list strong{display:block;font-size:15px}
+
+.platforms-list{display:flex;gap:8px;flex-wrap:wrap}
+.platforms-list li{background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-size:13px}
+
+.muted{color:var(--muted)}
+
+.controls{display:flex;gap:8px;align-items:center}
+
+.search-card input{width:100%}
+
