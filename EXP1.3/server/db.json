@@ -1,0 +1,17 @@
+{
+  "videos": [
+    {
+      "id": "1",
+      "title": "Server Authentication Overview",
+      "description": "A quick guide to how JWT-based authentication works and why stateless sessions are useful.",
+      "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4"
+    },
+    {
+      "id": "2",
+      "title": "Secure Token Storage",
+      "description": "Why localStorage is used for this demo and what production systems should consider.",
+      "videoUrl": "https://www.w3schools.com/html/mov_bbb.mp4"
+    }
+  ],
+  "editorContent": ""
+}
